@@ -1,0 +1,61 @@
+Here is the step-by-step procedure.
+
+You can use ubuntu in packaging the application. I also used it before but now I use Colaboratory (lesser space required) and easier. You can search it on the internet (link: https://colab.research.google.com/)
+
+On Colaboratory:
+
+Step 1. Create a new notebook.
+
+Step 2. Delete the content of sample data folder and delete the sample data folder as well. 
+
+Step 3. Upload your code including all the assets that you use on the application. 
+
+Step 4. Click the "+ Code".
+
+Step 5. Enter the following commands below codes one-by-one on Colaboratory.
+
+!pip install buildozer
+
+!pip install cython==0.29.19
+
+!sudo apt-get install -y \
+    python3-pip \
+    build-essential \
+    git \
+    python3 \
+    python3-dev \
+    ffmpeg \
+    libsdl2-dev \
+    libsdl2-image-dev \
+    libsdl2-mixer-dev \
+    libsdl2-ttf-dev \
+    libportmidi-dev \
+    libswscale-dev \
+    libavformat-dev \
+    libavcodec-dev \
+    zlib1g-dev
+
+!sudo apt-get install -y \
+    libgstreamer1.0 \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good
+
+!sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev libffi6
+
+!sudo apt-get install libffi-dev
+
+!buildozer init
+
+!buildozer -v android debug
+
+**Note on Step 5: The buildozer.spec file I sent should work since it works when I packaged your application and run it on my device. 
+
+Step 6. Once done, download the APK.
+
+Step 7. Transfer and Install the APK on your android device.
+
+Step 8. Check if the application runs well.
+
+Step 9. To end, use the command below on Colaboratory if everything worked well. 
+
+!buildozer android clean

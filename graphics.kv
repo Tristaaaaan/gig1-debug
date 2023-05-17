@@ -1,0 +1,592 @@
+<IntroScreen>:
+    name: 'intro'
+
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#1E1E15"
+
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    MDLabel:
+        text: "label"
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        pos_hint:{'center_x':0.51, 'center_y': 0.5}
+        elevation: 8
+
+    MDRaisedButton:
+        text:"I Acknowledge"
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        pos_hint:{'center_x': 0.5, 'center_y': 0.15}
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        size_hint: (0.1,0.1)
+        on_press: root.manager.current = 'vol'
+        elevation: 3
+        line_width: 0.00001
+
+    MDLabel:
+        text: "v1.01 4/23"
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        pos_hint:{'center_x':0.51, 'center_y': 0.85}
+        font_size: 10
+        elevation: 8
+
+
+
+
+
+<HomeScreen>:
+    name: 'home'
+
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#1E1E15"
+
+    MDIconButton:
+        icon: "comment"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'intro'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    # MDLabel:
+    #     text: 'the user should type in dob in mmddyyyy format but input should appear in box as mm/dd/yyyy'
+    #     theme_text_color: "Custom"
+    #     text_color: 8/255.0, 225/255.0, 8/255.0, 1
+    #     pos_hint:{'center_x':0.51, 'center_y': 0.7}
+    #     elevation: 8
+
+
+    MDLabel:
+        text: "Date of Birth MMDDYY"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+
+    TextField:
+        id: birthday_field
+        helper_text: "mmddyyyy format"
+        input_filter: "int"
+        mode:"rectangle"
+        font_size: 22
+        active_line: False
+        bold:True
+        cursor_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        text_color_focus: (147/255.0, 147/255.0 , 147/255.0, 1)
+        line_color_focus: (147/255.0, 147/255.0 , 147/255.0, 1)
+        hint_text_color: (147/255.0, 147/255.0 , 147/255.0, 1)
+        current_hint_text_color: (147/255.0, 147/255.0 , 147/255.0, 1)
+        line_color_normal: (147/255.0, 147/255.0 , 147/255.0, 1)
+
+        size_hint_x: 0.43
+        size_hint_y: 0.125
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        on_text: if len(self.text) > 10:  self.text = ""
+
+
+    MDRaisedButton:
+        text: "Restart"
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        elevation: 3
+        line_width: 0.00001
+        pos_hint:{'center_x': 0.5, 'center_y': 0.25}
+        on_press: birthday_field.text = ""
+        on_release: app.reset_data()
+
+    MDRaisedButton:
+        text: "Submit"
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        elevation: 3
+        line_width: 0.00001
+        pos_hint:{'center_x': 0.5, 'center_y': 0.45}
+        on_press: root.save_birthday_value(birthday_field.text)
+        on_release: root.validate(birthday_field.text)
+
+
+<VolScreen>
+    name: "vol"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: "#1E1E15"
+
+    MDLabel:
+        text: '-hit game system>xbox>madden for example '
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+
+        pos_hint:{'center_x':0.51, 'center_y': 0.7}
+        elevation: 8
+
+    MDLabel:
+        text: 'Age: '
+        id: age
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'right':1, 'center_y': 0.85}
+        halign: 'right'
+        elevation: 8
+
+    MDLabel:
+        text: '-menu or sub menu images should close once this screen changes'
+
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.51, 'center_y': 0.4}
+        elevation: 8
+
+
+    MDRaisedButton:
+        id: dropdown_button
+        text: 'Game System'
+        pos_hint: {"center_x": .5, "center_y": .5}
+        on_release: app.vol_menu.open()
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+<XBoxScreen>
+    name: 'xbox'
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+<PlaystationScreen>
+    name: 'playstation'
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+<FortnightScreen>
+    name: 'fortnight'
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+<MaddenScreen>
+    name: 'madden'
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    MDLabel:
+        text: 'Age: '
+        id: age
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'right':1, 'center_y': 0.85}
+        halign: 'right'
+        elevation: 8
+
+    MDLabel:
+        text: "If age is 18 and over this screen will appear "
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.51, 'center_y': 0.5}
+        elevation: 8
+
+    MDRaisedButton:
+        text:"Madden 2 "
+        text_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        pos_hint:{'center_x': 0.5, 'center_y': 0.25}
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        size_hint: (0.1,0.1)
+        on_press: root.manager.current = 'madden2'
+        elevation: 3
+        line_width: 0.00001
+
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        text: "app data is reset when pressing the home button, and user is back at the home(birthday entry) screen"
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+
+<Madden2Screen>
+    name: 'madden2'
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    ClickableLabel:
+        text: 'www.google.com '
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.95, 'center_y': 0.3}
+        elevation: 8
+        size_hint_y:.1
+        on_release: root.open_link()
+
+    MDLabel:
+        text: 'a clickable link'
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.95, 'center_y': 0.27}
+        elevation: 8
+
+
+    MDLabel:
+        text: 'Age: '
+        id: age
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'right':1, 'center_y': 0.85}
+        halign: 'right'
+        elevation: 8
+
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        text: "app data is reset when pressing the home button, and user is back at the home(birthday entry) screen"
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+<RejectScreen>
+    name: 'reject'
+
+    MDLabel:
+        text: 'this screen appears if under 18'
+
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.6, 'center_y': 0.6}
+        elevation: 8
+
+    MDLabel:
+        text: 'home button below also resets app'
+
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.6, 'center_y': 0.3}
+        elevation: 8
+
+    MDLabel:
+        text: 'and brings navigation home screen'
+
+        theme_text_color: "Custom"
+        text_color: 8/255.0, 225/255.0, 8/255.0, 1
+        pos_hint:{'center_x':0.6, 'center_y': 0.27}
+        elevation: 8
+
+
+    MDLabel:
+        id: age
+        text: "Sorry as your age is your are ineligbile to play "
+        text_color: (39/255.0, 247/255.0, 63/255.0, 1)
+        pos_hint:{'center_x':0.51, 'center_y': 0.5}
+        elevation: 8
+
+
+    MDTopAppBar:
+        md_bg_color: (87 / 255.0, 36 / 255.0, 123 / 255.0, 1)
+        pos_hint:  {'top':1}
+
+    AsyncImage:
+        source:'logo.png'
+        keep_ratio:True
+        allow_stretch:False
+        size_hint_y: None
+        height: 54
+        pos_hint: {'top':1}
+        elevation:8
+
+    MDIconButton:
+        # icon: "zmdi-caret-left-circle"
+        icon: "arrow-left-bold"
+        pos_hint: {"center_x": .25, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        icon: "home"
+        pos_hint: {"center_x": .5, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'home'
+        on_release: app.reset_data()
+        elevation:8
+
+    MDIconButton:
+        # icon: "mdi-arrow-left-bold-circle-outline"
+        icon: "arrow-right-bold"
+        pos_hint: {"center_x": .75, "center_y": .1}
+        theme_icon_color: "Custom"
+        icon_color: 147/255.0, 147/255.0 , 147/255.0, 1
+        icon_size: "32sp"
+        on_press: root.manager.current = 'vol'
+        elevation:8
+
+
+
+<CustomDrop@MDDropdownMenu>:
+    BoxLayout:
+        orientation:'vertical'
+        MDRaisedButton:
+            text: "example"
+        MDRaisedButton:
+            text: "example"
+        MDRaisedButton:
+            text: "example"
